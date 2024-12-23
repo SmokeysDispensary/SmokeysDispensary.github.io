@@ -56,6 +56,7 @@
             height: 500px;
             border: 2px solid #78A85A;
             border-radius: 10px;
+            pointer-events: all; /* Ensure iframe interaction is enabled */
         }
         .error {
             color: red;
@@ -108,9 +109,26 @@
                 // Hide the password prompt and show the content
                 document.getElementById('passwordPrompt').style.display = 'none';
                 content.style.display = 'block';
+
+                // Reapply scroll lock functionality when the content is displayed
+                setupScrollLock();
             } else {
                 errorMessage.style.display = 'block';
             }
+        }
+
+        function setupScrollLock() {
+            const iframe = document.querySelector('iframe');
+
+            // Disable scrolling when the mouse enters the iframe
+            iframe.addEventListener('mouseenter', () => {
+                document.body.style.overflow = 'hidden'; // Lock scrolling
+            });
+
+            // Enable scrolling when the mouse leaves the iframe
+            iframe.addEventListener('mouseleave', () => {
+                document.body.style.overflow = 'auto'; // Restore scrolling
+            });
         }
     </script>
 </body>
