@@ -32,7 +32,7 @@
         #passwordPrompt {
             margin-top: 50px;
         }
-        input[type="text"] {
+        input[type="password"] {
             padding: 10px;
             font-size: 16px;
         }
@@ -83,7 +83,8 @@
 
     <div id="passwordPrompt">
         <p>Please enter the employee passcode:</p>
-        <input type="text" id="passwordInput" placeholder="Enter Passcode">
+        <!-- Changed input type to password -->
+        <input type="password" id="passwordInput" placeholder="Enter Passcode">
         <button onclick="checkPassword()">Submit</button>
         <p id="errorMessage" class="error">Invalid passcode. Please try again.</p>
     </div>
