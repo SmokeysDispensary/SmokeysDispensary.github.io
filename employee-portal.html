@@ -12,7 +12,7 @@
             color: #78A94E;
             text-shadow: 1px 1px 2px black;
             text-align: center;
-            overflow: hidden; /* Prevents scrolling by default */
+            overflow: auto; /* Default behavior allows scrolling */
         }
         header {
             padding: 20px;
@@ -35,7 +35,7 @@
         }
         iframe {
             width: 100%;
-            height: 600px;
+            height: 500px;
             border: 2px solid #78A85A;
             border-radius: 10px;
             pointer-events: all; /* Ensure iframe interaction is enabled */
@@ -63,17 +63,23 @@
             }
         }
 
-        // Lock scrolling when the iframe is focused
-        function lockPageScroll(event) {
-            if (event.target === document.querySelector('iframe')) {
-                document.body.style.overflow = 'hidden';  // Lock scrolling
-            } else {
-                document.body.style.overflow = '';  // Restore scrolling
-            }
+        // Disable scrolling when mouse enters iframe area
+        function disableScrolling() {
+            document.body.style.overflow = 'hidden';  // Lock scrolling
         }
 
-        window.addEventListener('focusin', lockPageScroll);
-        window.addEventListener('focusout', lockPageScroll);
+        // Enable scrolling when mouse leaves iframe area
+        function enableScrolling() {
+            document.body.style.overflow = 'auto';  // Restore scrolling
+        }
+
+        window.addEventListener('load', () => {
+            const iframe = document.querySelector('iframe');
+
+            // Listen for mouse entering and leaving the iframe
+            iframe.addEventListener('mouseenter', disableScrolling);
+            iframe.addEventListener('mouseleave', enableScrolling);
+        });
     </script>
 </head>
 <body onload="checkPasscode()">
