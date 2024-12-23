@@ -98,6 +98,8 @@
     </footer>
 
     <script>
+        let scrollPosition = 0; // To store scroll position
+
         function checkPassword() {
             const input = document.getElementById('passwordInput').value;
             const content = document.querySelector('.content');
@@ -120,14 +122,20 @@
         function setupScrollLock() {
             const iframe = document.querySelector('iframe');
 
-            // Disable scrolling when the mouse enters the iframe
             iframe.addEventListener('mouseenter', () => {
-                document.body.style.overflow = 'hidden'; // Lock scrolling
+                scrollPosition = window.pageYOffset;
+                document.body.style.position = 'fixed';
+                document.body.style.top = `-${scrollPosition}px`;
+                document.body.style.left = '0';
+                document.body.style.right = '0';
             });
 
-            // Enable scrolling when the mouse leaves the iframe
             iframe.addEventListener('mouseleave', () => {
-                document.body.style.overflow = 'auto'; // Restore scrolling
+                document.body.style.position = '';
+                document.body.style.top = '';
+                document.body.style.left = '';
+                document.body.style.right = '';
+                window.scrollTo(0, scrollPosition); // Restore scroll position
             });
         }
     </script>
