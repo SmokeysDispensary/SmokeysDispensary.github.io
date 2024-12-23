@@ -12,7 +12,7 @@
             color: #78A94E;
             text-shadow: 1px 1px 2px black;
             text-align: center;
-            overflow: auto; /* Default behavior allows scrolling */
+            overflow: auto;
         }
         header {
             padding: 20px;
@@ -29,6 +29,24 @@
         nav a:hover {
             color: #A9D999;
         }
+        #passwordPrompt {
+            margin-top: 50px;
+        }
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #78A85A;
+            color: #415134;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #A9D999;
+        }
         .content {
             display: none;
             margin-top: 20px;
@@ -38,7 +56,11 @@
             height: 500px;
             border: 2px solid #78A85A;
             border-radius: 10px;
-            pointer-events: all; /* Ensure iframe interaction is enabled */
+        }
+        .error {
+            color: red;
+            margin-top: 10px;
+            display: none;
         }
         footer {
             margin-top: 30px;
@@ -47,54 +69,49 @@
             color: rgb(169, 217, 153);
         }
     </style>
-    <script>
-        function checkPasscode() {
-            const passcode = prompt("Enter the employee passcode:");
-            const validPasscode = "WestCoastWeed420"; // Replace with your passcode
-            const contentDiv = document.querySelector(".content");
-            const errorDiv = document.querySelector(".error");
-
-            if (passcode === validPasscode) {
-                contentDiv.style.display = "block";
-                errorDiv.style.display = "none";
-            } else {
-                errorDiv.textContent = "Invalid passcode. Please try again.";
-                errorDiv.style.display = "block";
-            }
-        }
-
-        // Disable scrolling when mouse enters iframe area
-        function disableScrolling() {
-            document.body.style.overflow = 'hidden';  // Lock scrolling
-        }
-
-        // Enable scrolling when mouse leaves iframe area
-        function enableScrolling() {
-            document.body.style.overflow = 'auto';  // Restore scrolling
-        }
-
-        window.addEventListener('load', () => {
-            const iframe = document.querySelector('iframe');
-
-            // Listen for mouse entering and leaving the iframe
-            iframe.addEventListener('mouseenter', disableScrolling);
-            iframe.addEventListener('mouseleave', enableScrolling);
-        });
-    </script>
 </head>
-<body onload="checkPasscode()">
+<body>
     <header>
         <h1>Employee Portal</h1>
     </header>
     <nav>
         <a href="index.html">Home</a>
         <a href="menu.html">Menu</a>
-        <a href="https://forms.gle/your_delivery_form" target="_blank">Delivery Order</a>
+        <a href="https://forms.gle/6zX7urdfEU3KtzkDA" target="_blank">Delivery Order</a>
     </nav>
-    <div class="error" style="color: red; margin-top: 20px; display: none;"></div>
+
+    <div id="passwordPrompt">
+        <p>Please enter the employee passcode:</p>
+        <input type="text" id="passwordInput" placeholder="Enter Passcode">
+        <button onclick="checkPassword()">Submit</button>
+        <p id="errorMessage" class="error">Invalid passcode. Please try again.</p>
+    </div>
+
     <div class="content">
         <p>Access company resources below:</p>
         <iframe src="https://docs.google.com/spreadsheets/d/1rxmt9J8XMnBj2dEatY76c_4CkKefSo-AG2MuHSk8kwU/edit?usp=sharing" title="Employee Resources"></iframe>
     </div>
+
+    <footer>
+        <p>&copy; 2024 Smokey's Dispensary | All Rights Reserved</p>
+    </footer>
+
+    <script>
+        function checkPassword() {
+            const input = document.getElementById('passwordInput').value;
+            const content = document.querySelector('.content');
+            const errorMessage = document.getElementById('errorMessage');
+
+            const validPasscode = "WestCoastWeed420"; // Replace with your passcode
+
+            if (input === validPasscode) {
+                // Hide the password prompt and show the content
+                document.getElementById('passwordPrompt').style.display = 'none';
+                content.style.display = 'block';
+            } else {
+                errorMessage.style.display = 'block';
+            }
+        }
+    </script>
 </body>
 </html>
