@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Portal - Smokey's Dispensary</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #415134;
+            color: #78A94E;
+            text-shadow: 1px 1px 2px black;
+            text-align: center;
+        }
+        header {
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.8);
+            border-bottom: 2px solid #78A85A;
+        }
+        nav a {
+            text-decoration: none;
+            color: #78A85A;
+            font-weight: bold;
+            margin: 0 15px;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: #A9D999;
+        }
+        .content {
+            display: none;
+            margin-top: 20px;
+        }
+        iframe {
+            width: 100%;
+            height: 600px;
+            border: 2px solid #78A85A;
+            border-radius: 10px;
+        }
+        footer {
+            margin-top: 30px;
+            padding: 10px 0;
+            background-color: rgb(169, 217, 153);
+            color: rgb(169, 217, 153);
+        }
+    </style>
+    <script>
+        function checkPasscode() {
+            const passcode = prompt("Enter the employee passcode:");
+            const validPasscode = "Smokey2024"; // Replace with your passcode
+            const contentDiv = document.querySelector(".content");
+            const errorDiv = document.querySelector(".error");
+
+            if (passcode === validPasscode) {
+                contentDiv.style.display = "block";
+                errorDiv.style.display = "none";
+            } else {
+                errorDiv.textContent = "Invalid passcode. Please try again.";
+                errorDiv.style.display = "block";
+            }
+        }
+    </script>
+</head>
+<body onload="checkPasscode()">
+    <header>
+        <h1>Employee Portal</h1>
+    </header>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="menu.html">Menu</a>
+        <a href="https://forms.gle/your_delivery_form" target="_blank">Delivery Order</a>
+    </nav>
+    <div class="error" style="color: red; margin-top: 20px; display: none;"></div>
+    <div class="content">
+        <p>Access company resources below:</p>
+        <iframe src="https://docs.google.com/spreadsheets/d/YOUR_SPREADSHEET_ID" title="Employee Resources"></iframe>
+    </div>
+    <footer>
+        <p>&copy; 2025 Smokey's Dispensary | All Rights Reserved</p>
+    </footer>
+</body>
+</html>
